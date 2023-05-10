@@ -59,6 +59,7 @@ while True:
         print("Invalid cluster value. Please enter a valid integer value that exists in the data.")
 
 filtered_data = filtered_data[filtered_data['cluster'] == int(cluster_value)]
+filtered_data = filtered_data.drop(columns=['label'])
 
 filtered_data.to_csv("filtered_pca_data.csv", index=False)
 
