@@ -1,7 +1,7 @@
 import pandas as pd
 
 # Load the PCA data
-data = pd.read_csv("mfcc_data_clusters_k3.csv")
+data = pd.read_csv("crossCheckResult/mfcc_data_clusters_k3.csv")
 
 # Convert time column to HH:MM:SS format
 data['time'] = data['time'].str.replace('_', ':').str[:-4]
@@ -49,18 +49,7 @@ while True:
         print("Invalid time format. Please enter a valid time in HH:MM:SS format.")
 
 filtered_data = filtered_data[(filtered_data['time'] >= start_time) & (filtered_data['time'] <= end_time)]
-
-# Filter by cluster value
-while True:
-    cluster_value = input("Enter cluster value: ")
-    if cluster_value.isdigit() and int(cluster_value) in data['cluster'].unique():
-        break
-    else:
-        print("Invalid cluster value. Please enter a valid integer value that exists in the data.")
-
-filtered_data = filtered_data[filtered_data['cluster'] == int(cluster_value)]
 filtered_data = filtered_data.drop(columns=['label'])
-
 filtered_data.to_csv("filtered_pca_data.csv", index=False)
 
 # Print the filtered data
